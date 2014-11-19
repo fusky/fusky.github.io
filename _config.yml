@@ -7,30 +7,30 @@ kramdown:
 
 # 作者信息
 author: 
-  name: 闫肃
-  email: suyan0830@gmail.com
-  link: http://yansu.org
-  weibo: http://weibo.com/yansu0711
-  github: http://github.com/suyan
+  name: fusky
+  email: choggle2011@gmail.com
+  link: http://fusky.iperson.cn
+  weibo: http://weibo.com/fusky
+  github: http://github.com/fusky0512
 
 # 站点信息
-title: 闫肃的博客 
-description: 闫肃的博客
-url: http://yansu.org
+title: fusky的博客
+description: fusky的博客
+url: http://fusky.iperson.cn
 rss_url: /pages/atom.xml
 
 # gavatar头像及Favicon
-gavatar: http://yansu-uploads.stor.sinaapp.com/imgs/gavatar.png
-favicon: http://yansu-uploads.stor.sinaapp.com/imgs/favicon.ico
+gavatar: http://blog.iperson.cn/usr/uploads/2014/11/3254891614.jpg
+favicon: 
 
 # google analytics 设置
 ga:
   id: UA-54767140-1
-  url: yansu.org
+  url: fusky.iperson.cn
 
 # disqus 设置
 disqus:
-  shortname: suyan-zh
+  shortname: fusky-zh
 
 # 主题设置，自动激活某个标签
 active: 技术
