@@ -10,8 +10,8 @@ author:
   name: fusky
   email: choggle2011@gmail.com
   link: http://fusky.iperson.cn
-  weibo: http://weibo.com/fusky
-  github: http://github.com/fusky0512
+  weibo: http://weibo.com/fusky0512
+  github: http://github.com/fusky
 
 # 站点信息
 title: fusky的博客
@@ -30,7 +30,7 @@ ga:
 
 # disqus 设置
 disqus:
-  shortname: fusky-zh
+  shortname: fusky0512-zh
 
 # 主题设置，自动激活某个标签
 active: 技术
