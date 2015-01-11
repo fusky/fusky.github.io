@@ -1,10 +1,9 @@
 ---
 layout: post
-title: Nodejs 入门
-category: Nodejs
-tags: [Nodejs, 教程, Web开发] 
-keywords:  Nodejs,Mac,MongoDB,Web
-description:Nodejs入门教程，在 Mac 下搭建环境并测试。
+title: Nodejs简单入门
+category:  Nodejs
+tags: Nodejs
+description:  Nodejs 建立简单 web 服务。
 ---
 
 > Mac下搭建Nodejs 开发环境，进行简单的编程，仅做一个Nodejs入门。
