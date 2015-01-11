@@ -2,7 +2,7 @@
 layout: post
 title: 创业随笔--创业精神
 category:  创业
-tags: 创业
+tags: 随笔
 description:  创业过程中的点点滴滴。
 ---
 

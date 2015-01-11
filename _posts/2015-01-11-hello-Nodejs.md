@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nodejs简单入门
-category:  Nodejs
+category:  技术
 tags: Nodejs
 description:  Nodejs 建立简单 web 服务。
 ---
