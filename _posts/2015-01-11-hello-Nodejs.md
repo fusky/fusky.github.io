@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nodejs 入门
-category:  Nodejs
+category: Nodejs
 tags: [Nodejs, 教程, Web开发] 
 keywords:  Nodejs,Mac,MongoDB,Web
 description:Nodejs入门教程，在 Mac 下搭建环境并测试。
