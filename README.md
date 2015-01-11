@@ -1,6 +1,6 @@
 ### 我的博客
 
-地址：[http://yansu.org](http://yansu.org)
+地址：[http://iperson.cn](http://yansu.org)
 
 ### 安装说明
 
@@ -11,8 +11,7 @@
 5. 修改`_config.yml`配置项
 6. It's done!
 
-### 分支说明
+### 主题说明
 
-- 三栏布局（master分支）
-- 单栏布局（first-ui分支）
+感谢[http://yansu.org](http://yansu.org)提供的主题。
 
