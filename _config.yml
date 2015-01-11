@@ -9,24 +9,23 @@ kramdown:
 author: 
   name: fusky
   email: choggle2011@gmail.com
-  link: http://fusky.iperson.cn
-  weibo: http://weibo.com/fusky0512
+  link: http://iperson.cn
   github: http://github.com/fusky
 
 # 站点信息
 title: fusky的博客
 description: fusky的博客
-url: http://fusky.iperson.cn
+url: http://iperson.cn
 rss_url: /pages/atom.xml
 
 # gavatar头像及Favicon
-gavatar: http://blog.iperson.cn/usr/uploads/2014/11/3254891614.jpg
+gavatar: http://565tech.com/data/upload/201501/s_812be23ca5a3f502af24b10ef6523552.jpg
 favicon: 
 
 # google analytics 设置
 ga:
   id: UA-54767140-1
-  url: fusky.iperson.cn
+  url: iperson.cn
 
 # disqus 设置
 disqus:
