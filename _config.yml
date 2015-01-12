@@ -32,10 +32,8 @@ ga:
  # shortname: fusky
 
 #多说配置
-comments:
-  provider: duoshuo
-  duoshuo:
-    short_name: xiaochaolee
+duoshuo:
+  shortname: xiaochaolee
 
 # 主题设置，自动激活某个标签
 active: 技术
