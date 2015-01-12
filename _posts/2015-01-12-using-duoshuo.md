@@ -37,7 +37,7 @@ var duoshuoQuery = {short_name:"xiaochaolee"};
     <div class="ds-thread" data-thread-key={{page.id}} data-title={{page.title}} data-url="iperson.cn{{page.url}}"></div>
 <!-- 多说评论框 end -->
 
-其中** iperson.cn **改成你自己的域名，然后将代码保存为 duoshuo.html 放到 _includes 目录下。
+其中`person.cn`改成你自己的域名，然后将代码保存为 duoshuo.html 放到 _includes 目录下。
 
 接下来修改 _comfig.yml 文件，找到 disqus 设置的地方，将下面的代码注释，并写上多说的配置选项。
 
@@ -47,7 +47,7 @@ var duoshuoQuery = {short_name:"xiaochaolee"};
     duoshuo:
       shortname: iperson (上面注册多说账号时候的 shortname)
       
-  然后修改 _layouts 目录下单 page.html 文件，将其中的 {% include disqus.html %} 替换为  {% include duoshuo.html %} 保存即可。
+  然后修改 _layouts 目录下单 page.html 文件，将其中的 【include disqus.html】 替换为 【include duoshuo.html】 保存即可。
          
 push 到你的仓库，查看网站看看效果吧！
     
