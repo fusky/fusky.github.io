@@ -28,11 +28,17 @@ ga:
   url: iperson.cn
 
 # disqus 设置
-disqus:
-  shortname: fusky
+#disqus:
+ # shortname: fusky
+
+#多说配置
+comments:
+  provider: duoshuo
+  duoshuo:
+    short_name: xiaochaolee
 
 # 主题设置，自动激活某个标签
-active: 随笔
+active: 技术
 
 # 首页除了最新文章外显示分类
 cates: 
