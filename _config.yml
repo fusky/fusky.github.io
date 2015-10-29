@@ -29,11 +29,11 @@ ga:
 
 # disqus 设置
 #disqus:
- # shortname: fusky
+#shortname: fusky
 
 #多说配置
-duoshuo:
-  shortname: xiaochaolee
+#duoshuo:
+#shortname: xiaochaolee
 
 # 主题设置，自动激活某个标签
 active: 技术
