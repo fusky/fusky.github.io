@@ -19,46 +19,46 @@ description:  网页编辑器的使用，TinyEditor 使用笔记。
 
 1. 在网页中引用 TinyEditor 提供的 js 文件和 css 文件。
 2. 在网页中添加标签，就是个 textarea 标签。
-  <textarea id=“input” style=“width:400px; height:200px”></textarea>
+	 <textarea id=“input” style=“width:400px; height:200px”></textarea>
 3. 初始化编辑器，配置参数。
-	new TINY.editor.edit(‘editor’,{
-		id:’input’, 
-	// (必须)上面第二步中定义的textarea的id
-		width:584, 
-	// (选填) 编辑器宽度
-		height:175,
-	 // (选填) 编辑器高度
-		cssclass:’te’,
-	 // (选填) 编辑器的class，用来通过css控制样式
-		control class:’decontrol’,
-	 // (选填) 编辑器上按钮的class
-		row class:’teheader’,
-	 // (选填) 编辑器按钮行的class
-		dividerclass:’tedivider’, 
-	// (选填) 编辑器按钮间分割线的样式
-		controls:[‘bold’, ‘italic’, ‘underline’, ‘strikethrough’, ‘|’, ‘subscript’, ‘superscript’, ‘|’, ‘ordered list’, ‘unordered list’, ‘|’ ,’outdent’ ,’indent’, ‘|’, ‘left align’, ‘center align’, ‘right align’, ‘block justify’, ‘|’, ‘unformed’, ‘|’, ‘undo’, ‘redo’, ’n’, ‘font’, ‘size’, ‘style’, ‘|’, ‘image’, ‘hr’, ‘link’, ‘unlink’, ‘|’, ‘cut’, ‘copy’, ‘paste’, ‘print’],
-	 // (必须) 要根据需要在编辑器上添加按钮控件, 其中’|’代表功能按钮间的竖分割线，’n’代表按钮行间的分割线
-		footer:true, 
-	// (选填) 是否显示编辑器底部
-		fonts:[‘Verdana’,’Arial’,’Georgia’,’Trebuchet MS’],  
-	// (选填) 编辑器中可选择的字体
-		xhtml:true, 
-	// (选填) 编辑器生成xhtml还是html标记
-		cssfile:’style.css’, 
-	// (选填) 要为编辑器附加的外部css文件
-		content:’starting content’, 
-	// (选填) 设置编辑器编辑区域中的初始内容
-		css:’body{background-color:#ccc}’,
-	 // (选填) 设置编辑器编辑区域背景
-		bodied:’editor’, 
-	// (选填) 设置编辑区域ID
-		footer class:’tefooter’, 
-	// (选填) 设置编辑器底部class
-		toggle:{text:’源代码’,active text:’可视化’,cssclass:’toggle’},
-	 // (选填) 设置源代码浏览切换文字，及切换按钮的class
-		resize:{cssclass:’resize’} 
-	// (选填) 设置编辑器大小调整按钮的class
-	});
+		new TINY.editor.edit(‘editor’,{
+			id:’input’, 
+		// (必须)上面第二步中定义的textarea的id
+			width:584, 
+		// (选填) 编辑器宽度
+			height:175,
+		 // (选填) 编辑器高度
+			cssclass:’te’,
+		 // (选填) 编辑器的class，用来通过css控制样式
+			control class:’decontrol’,
+		 // (选填) 编辑器上按钮的class
+			row class:’teheader’,
+		 // (选填) 编辑器按钮行的class
+			dividerclass:’tedivider’, 
+		// (选填) 编辑器按钮间分割线的样式
+			controls:[‘bold’, ‘italic’, ‘underline’, ‘strikethrough’, ‘|’, ‘subscript’, ‘superscript’, ‘|’, ‘ordered list’, ‘unordered list’, ‘|’ ,’outdent’ ,’indent’, ‘|’, ‘left align’, ‘center align’, ‘right align’, ‘block justify’, ‘|’, ‘unformed’, ‘|’, ‘undo’, ‘redo’, ’n’, ‘font’, ‘size’, ‘style’, ‘|’, ‘image’, ‘hr’, ‘link’, ‘unlink’, ‘|’, ‘cut’, ‘copy’, ‘paste’, ‘print’],
+		 // (必须) 要根据需要在编辑器上添加按钮控件, 其中’|’代表功能按钮间的竖分割线，’n’代表按钮行间的分割线
+			footer:true, 
+		// (选填) 是否显示编辑器底部
+			fonts:[‘Verdana’,’Arial’,’Georgia’,’Trebuchet MS’],  
+		// (选填) 编辑器中可选择的字体
+			xhtml:true, 
+		// (选填) 编辑器生成xhtml还是html标记
+			cssfile:’style.css’, 
+		// (选填) 要为编辑器附加的外部css文件
+			content:’starting content’, 
+		// (选填) 设置编辑器编辑区域中的初始内容
+			css:’body{background-color:#ccc}’,
+		 // (选填) 设置编辑器编辑区域背景
+			bodied:’editor’, 
+		// (选填) 设置编辑区域ID
+			footer class:’tefooter’, 
+		// (选填) 设置编辑器底部class
+			toggle:{text:’源代码’,active text:’可视化’,cssclass:’toggle’},
+		 // (选填) 设置源代码浏览切换文字，及切换按钮的class
+			resize:{cssclass:’resize’} 
+		// (选填) 设置编辑器大小调整按钮的class
+		});
 
 PS:在使用的时候记得调用 instance.post()函数，以确保编辑区域中最新的可视化内容转换为标记文本。在上面的实例中就是在提交的 button 标签中设置 onclick=“input.post()”。
 
