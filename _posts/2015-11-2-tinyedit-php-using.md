@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Tinyeditor
+title: Tinyeditor的使用
 category:  技术
-tags: tinyeditor
-description:  Tinyeditor的使用。
+tags: TinyEditor 网页编辑器
+description:  网页编辑器的使用，TinyEditor 使用笔记。
 ---
 
 ##Tinyeditor  选择
