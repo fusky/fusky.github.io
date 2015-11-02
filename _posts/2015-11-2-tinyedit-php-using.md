@@ -1,6 +1,6 @@
 ---
 layout: post
-- [ ] title: Tinyeditor
+title: Tinyeditor
 category:  技术
 tags: tinyeditor
 description:  Tinyeditor的使用。
