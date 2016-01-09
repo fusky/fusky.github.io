@@ -1,5 +1,5 @@
 ---
-title : Sitemap
+title : 地图
 ---
 
 {% for page in site.pages %}
