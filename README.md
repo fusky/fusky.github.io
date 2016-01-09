@@ -1,6 +1,6 @@
 ### 我的博客
 
-地址：[http://iperson.cn](http://yansu.org)
+地址：[http://iperson.cn](http://iperson.cn)
 
 ### 安装说明
 
