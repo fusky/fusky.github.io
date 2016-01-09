@@ -45,7 +45,7 @@ description:  Nodejs 建立简单 web 服务。
     npm help <term>  search for help on <term>
     npm help npm     involved overview
     
-## 第一个nodejs 程序
+# 第一个nodejs 程序
 
 Nodejs 不需要类似 Apache 等的服务器软件就可以开启 web 服务，非常的方便，我们今天简单地写一个网页作为 nodejs 的入门，在浏览器中输出 Hello Nodejs！
 
