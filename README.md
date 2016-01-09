@@ -11,7 +11,5 @@
 5. 修改`_config.yml`配置项
 6. It's done!
 
-### 主题说明
 
-感谢[http://yansu.org](http://yansu.org)提供的主题。
 
