@@ -23,15 +23,16 @@ mysql_query(“set names ‘utf8’”);//写库
 
 - 3、内部编码
 通常经过上面的设置一般不会出现字符编码的问题。还有一个设置 php 内部编码的函数，这是 http 默认输入输出编码方式。
+
 ```
 <?php
 /* 设置内部字符编码为 UTF-8 */
 mb_internal_encoding(“UTF-8”);
-
 /* 显示当前的内部字符编码*/
 echo mb_internal_encoding();
 ?>
 ```
+
 #  URL字符串编码
 之前开发支付接口的时候遇到过 URL 编码的问题，类似【%E4%B8%AD%E6%96%87】这样的从名字也可以看出这是对网址的一种编码，我们在使用百度和 google 的时候会发现搜索引擎默认将中文进行了 url 编码，在做数据提交的时候浏览器也会将 post 提交的内容默认做 url 编码，所以我们有的时候从服务获取的数据也要做一下 url 解码。PHP 中涉及到 url 编码的函数有四个，分别是urlencode()、urldecode()、rawurlencode()、rawurldecode()，通常使用前两个就可以了。rulencoude() 和 rawurlencode() 的区别在于：
 **urlencode 将空格则编码为加号（+***）
