@@ -4,7 +4,7 @@ title: 程序员如何自动提交工作日志
 category:  工作
 tags: [随笔 , 总结 , 工作]
 description:  自动生成并提交工作日志给领导
-header-img: "img/home_bg.jpg"
+header-img: "img/404_bg.jpg"
 ---
 
 #起因
@@ -14,6 +14,6 @@ header-img: "img/home_bg.jpg"
 # 最终效果
 我早上只需要在自己的todo 列表中安排工作内容，完成的时候打个勾，下班的时候填一下今日总结。到晚上六点四十的时候 ，会自动生成 excel 并发送到领导邮箱。
 
-![image](img/todo.png)
+![image](http://iperson.cn/img/todo.png)
 
-![image](img/email.png)
+![image](http://iperson.cn/img/email.png)
