@@ -4,7 +4,7 @@ title: 程序员如何自动提交工作日志
 category:  工作
 tags: [随笔 , 总结 , 工作]
 description:  自动生成并提交工作日志给领导
-header-img: "img/404_bg.jpg"
+header-img: "img/tag-bg.jpg"
 ---
 
 #起因
@@ -17,3 +17,271 @@ header-img: "img/404_bg.jpg"
 ![image](http://iperson.cn/img/todo.png)
 
 ![image](http://iperson.cn/img/email.png)
+
+# 实现方案
+首先是 todo 列表的提交，我的 todo 项目是直接拷贝[ToDolist](http://www.todolist.cn/)项目的源码添加了提交数据的功能。这个小项目很实用，通过 html5本地存储技术做了一个十分小巧的 todo 应用。我在里面添加了一个 form 表单，在页面点击提交的时候自动将当天的 todo 列表提交到数据库。
+
+然后在 thinkphp 框架中添加模板通过phpExcel 库将数据库中存储的数据导出成表格。这样我只需要通过 get 请求一个地址就可以生成 当日工作表格供浏览器下载。本来我准备通过 wget 或者 curl 去把生成的表格存储在服务器上，或者直接生成的时候就存储在服务器上，但是试了一下没有成功，我就直接使用了以前的 python 脚本，接收生成的文件。
+
+```
+# -*- coding: UTF-8 -*-
+#!/usr/bin/python
+
+import urllib
+import urllib2
+import shutil
+import time
+import requests
+import MySQLdb as mdb
+import sys
+
+time = time.strftime('%Y-%m-%d',time.localtime(time.time()));      
+req = requests.get('excel 生成的地址')
+with open(' 存放目录'+time+'.xlsx', 'wb') as file:
+    file.write(req.content)   
+
+```
+生成 excel 文件的函数，调用 phpExcel 可以根据其接口设置 excel 格式
+
+```
+    public function todo(){
+        $todos = M("todo")->where(array('date'=>date('Y-m-d')))->select();
+        $data = array();
+        $i = 1;
+        foreach ($todos as $k => $todo){
+            $data[$k][id] = $i++;
+            $data[$k][job] = "项目功能开发";
+            $data[$k][todo] = $todo['todo'];
+            $data[$k][time] = (int)$todo['time'];
+            if(!$data[$k][time]){
+                $data[$k][time] = 0.5;
+            }
+            $data[$k][flag] = $todo['flag'];
+        }
+
+        $filename="工作日志-".date('Y/m/d');
+        $res = D('Excel')->todo($data,$filename,"工作日志");
+    }
+```
+Excel 文件生成代码
+
+```
+//导出TODO Excel表格
+public function todo($data,$excelFileName,$sheetTitle){
+    $this->__construct();
+
+    /* 实例化类 */
+    $objPHPExcel = new PHPExcel(); 
+    
+    /* 设置输出的excel文件为2007兼容格式 */
+    //$objWriter=new PHPExcel_Writer_Excel5($objPHPExcel);//非2007格式
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+    
+    /* 设置当前的sheet */
+    $objPHPExcel->setActiveSheetIndex(0);
+  
+    $objActSheet = $objPHPExcel->getActiveSheet();
+
+    // 字体设置
+    $objPHPExcel->getDefaultStyle()->getFont()->setName( '宋体');  
+    $objPHPExcel->getDefaultStyle()->getFont()->setSize(14);
+
+
+     /*设置宽度*/
+    $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(10);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(40);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(30); 
+  
+    /* sheet标题 */
+    $objActSheet->setTitle($sheetTitle);
+    
+    //设置表头
+    $objPHPExcel->setActiveSheetIndex(0) ->setCellValue('A1', "人员");
+    $objPHPExcel->setActiveSheetIndex(0) ->setCellValue('B1', "序号");
+    $objPHPExcel->setActiveSheetIndex(0) ->setCellValue('C1', "工作性质");
+    $objPHPExcel->setActiveSheetIndex(0) ->setCellValue('D1', "工作内容");
+    $objPHPExcel->setActiveSheetIndex(0) ->setCellValue('E1', "工作用时");
+    $objPHPExcel->setActiveSheetIndex(0) ->setCellValue('F1', "想法建议");
+
+    $column = 2;
+    $objActSheet = $objPHPExcel->getActiveSheet();
+
+    // print_r($data);exit;
+    foreach($data as $key => $rows){ //行写入
+        $span = ord("B");
+
+        if($rows['flag'] == 1){
+            foreach($rows as $keyName=>$value){// 列写入
+                $j = chr($span);
+                $objActSheet->setCellValue($j.$column, ' '.$value);
+                $span++;
+            }
+            $column++;
+        }else{
+            $objActSheet->setCellValue('F2', $rows['todo']);
+            $objPHPExcel->getActiveSheet()->getStyle('F2')->getAlignment()->setWrapText(true);
+        }  
+    }
+    $column--;
+    // 单元格合并
+    $objPHPExcel->getActiveSheet()->mergeCells( 'A2:A'.$column);
+    $objPHPExcel->getActiveSheet()->mergeCells( 'F2:F'.$column);
+    // 人员和建议设置
+    $objActSheet->setCellValue('A2', '李小超');
+
+    // 单元格格式
+    $objPHPExcel->getActiveSheet()->getStyle( 'F2:'.'F'.$column)->applyFromArray(
+        array(
+               'font'    => array (
+                     'bold'      => true
+               ),
+               'alignment' => array (
+                     'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT ,
+              ),
+               'fill' => array (
+                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR ,
+                     'rotation'   => 90,
+                     'startcolor' => array (
+                           'argb' => 'FFF68F'
+                     ),
+                     'endcolor'   => array (
+                           'argb' => 'FFF68F'
+                     )
+              ),
+               'borders' => array (
+                     'top'     => array (
+                           'style' => PHPExcel_Style_Border::BORDER_THIN
+                    )
+              )
+        )
+    );
+
+    // 垂直居中显示
+    $objPHPExcel->getActiveSheet()->getStyle('A1:A'.$column)->applyFromArray(
+        array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            )
+        )
+    );
+
+    $objPHPExcel->getActiveSheet()->getStyle('B1:B'.$column)->applyFromArray(
+        array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            )
+        )
+    );
+
+    $objPHPExcel->getActiveSheet()->getStyle('C1:C'.$column)->applyFromArray(
+        array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            )
+        )
+    );
+    
+    $objPHPExcel->getActiveSheet()->getStyle('D1:D'.$column)->applyFromArray(
+        array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            )
+        )
+    );
+
+    $objPHPExcel->getActiveSheet()->getStyle('E1:E'.$column)->applyFromArray(
+        array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+            )
+        )
+    );
+
+    $objPHPExcel->getActiveSheet()->getStyle('F1:F'.$column)->applyFromArray(
+        array(
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            )
+        )
+    );
+
+
+    /* 生成到浏览器，提供下载 */ 
+    ob_end_clean();  //清空缓存      
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control:must-revalidate,post-check=0,pre-check=0");
+    header("Content-Type:application/force-download");
+    header("Content-Type:application/vnd.ms-execl");
+    header("Content-Type:application/octet-stream");
+    header("Content-Type:application/download");
+    header('Content-Disposition:attachment;filename="'.$excelFileName.'.xlsx"');
+    header("Content-Transfer-Encoding:binary"); 
+    $objWriter->save('php://output');
+}
+```
+发送邮件采用mailer发送。
+
+```
+<?php
+/*
+ | --------------------------------------------------------------------------
+ | Author: Fusky  |  E-Mail: choggle2011@gmail.com  |  2016-04-11 13:58:21
+ | --------------------------------------------------------------------------
+ | Copyright (c) 20014-2016 http://iperson.cn   All rights reserved.
+ | --------------------------------------------------------------------------
+ | 
+ | 邮件发送
+ | 
+ */
+	//邮件发送
+	require './mailer/class.phpmailer.php';
+	require './mailer/class.smtp.php';
+	date_default_timezone_set('PRC');
+	// ignore_user_abort();
+	// set_time_limit(0);
+	// $interval = 60*1;
+	// do{
+	$mail = new PHPMailer(); 
+	// $mail->SMTPDebug = 3;
+	$mail->isSMTP();
+	$mail->SMTPAuth=true;
+	$mail->Host = 'smtp.qq.com';
+	$mail->SMTPSecure = 'ssl';
+	//设置ssl连接smtp服务器的远程服务器端口号 可选465或587
+	$mail->Port = 465;
+	$mail->Hostname = 'localhost';
+	$mail->CharSet = 'UTF-8';
+	$mail->FromName = '名称';
+	$mail->Username ='qq号';
+	$mail->Password = '邮箱密码';
+	$mail->From = '邮箱地址';
+	$mail->isHTML(true); 
+	// $mail->addAddress('发送的邮箱地址','名称');
+	$mail->Subject = '李小超工作日志'.date('Y-m-d');
+	$mail->Body = "李小超工作日志已生成，请在附件中下载！";
+	$mail->addAttachment('/home/choggle/sendMail/job/'.date('Y-m-d').'.xlsx');
+	$status = $mail->send();
+	$filename = "/home/choggle/sendMail/job/sendMail.log";
+	if($status) {
+		error_log("----邮件发送成功----".date('Y-m-d H:i:s')."\n", 3, $filename);
+	}else {
+		error_log("----邮件发送失败----".date('Y-m-d H:i:s')."\n", 3, $filename);
+		error_log("----错误信息----\n".$mail->ErrorInfo."\n", 3, $filename);
+	}
+	// sleep($interval);//休眠1minute
+	// }while(true);
+?>
+
+```
+添加 crontab定时任务，然后每天自动给领导发送工作邮件，就是这么省事！
+
+```
+30 18 * * * /usr/bin/python  /home/User/sendMail/todo.py
+40 18 * * * /usr/bin/curl  http地址/todoMail.php
+```
